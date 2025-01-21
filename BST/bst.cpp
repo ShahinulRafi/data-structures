@@ -33,6 +33,22 @@ void bst_insert(Node* root, int val)
 
 }
 
+Node* array_to_bst(int a[], int n, int l, int r)
+{
+    if( l > r ) return NULL;
+
+    int mid = (l+r) / 2;
+
+    Node* root = new Node(a[mid]);
+    Node* left_root = array_to_bst(a, n, l, mid-1);
+    Node* right_root = array_to_bst(a, n, mid+1, r);
+
+    root->left = left_root;
+    root->right = right_root;
+
+    return root;
+}
+
 void tree_level_print(Node* root)
 {
     if(root == NULL) return;
