@@ -3,12 +3,14 @@ using namespace std;
 
 vector<int> adj_list[1005]; // total nodes
 bool vis[1005];             // same
+bool level[1005];
 
 void bfs(int src) // O(V+E)
 {
     queue<int> q;
     q.push(src);
     vis[src] = true;
+    level[src] = 0;
 
     while (!q.empty()) // O(N) or O(Vertices)
     {
@@ -23,6 +25,7 @@ void bfs(int src) // O(V+E)
             {
                 q.push(child);
                 vis[child] = true;
+                level[child] = level[par] + 1;
             }
         }
     }
@@ -33,6 +36,8 @@ int main()
     cin >> n >> q;
     memset(adj_list, 0, sizeof(adj_list));
     memset(vis, false, sizeof(vis));
+    memset(level, -1, sizeof(level));
+
     while (n--)
     {
         int a, b;
@@ -40,8 +45,12 @@ int main()
         adj_list[a].push_back(b);
         adj_list[b].push_back(a);
     }
-    int src;
-    cin >> src;
+
+    int src, des;
+    cin >> src >> des;
     bfs(src);
+
+    cout << level[des] << endl;
+
     return 0;
 }

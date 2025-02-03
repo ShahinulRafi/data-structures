@@ -40,8 +40,13 @@ int main()
         adj_list[a].push_back(b);
         adj_list[b].push_back(a);
     }
-    int src;
-    cin >> src;
+    int src, des;
+    cin >> src >> des;
     bfs(src);
+
+    if (vis[des])
+        cout << "Yes" << endl;
+    else
+        cout << "No" << endl;
     return 0;
 }
